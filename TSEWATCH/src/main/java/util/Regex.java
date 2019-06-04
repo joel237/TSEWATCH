@@ -1,5 +1,6 @@
 package util;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,9 +27,12 @@ public class Regex {
 		Matcher m = r.matcher(content);
 		if(m.find()) {
 			return m.group(0);
+			
 		}
 		return null;
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		
