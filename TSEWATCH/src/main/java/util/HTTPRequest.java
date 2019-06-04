@@ -13,7 +13,6 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -60,6 +59,8 @@ public class HTTPRequest {
 	private static ArrayList<AvisST> listAvisST = null;
 	
 	private static String USER_AGENT = "Mozilla/5.0"; 
+	
+	
 	
     public static void incrementDownloadNumByOne() {
     	downloadNum ++;
@@ -122,13 +123,11 @@ public class HTTPRequest {
 		    } catch (Exception e) {}
 		  }
 	
-	public static String sendPost(String url,Map<String,String> params) throws Exception {
+	public String sendPost(String url,Map<String,String> params) throws Exception {
 		
 		disableCertificateValidation();
 		// Get a httpClient object
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-		
-		
 	    
 		// Creat a list to store params
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
@@ -161,20 +160,44 @@ public class HTTPRequest {
 	}
 	
 	// Scrawler ONLY for https://boamp.fr/avis/liste
-	public static ArrayList<String> getLinksBOAMP(String nomacheteur /*Add param here*/ ) throws Exception{
+	public ArrayList<String> getLinksBOAMP() throws Exception{
 		listBoampNameOfPDF = new ArrayList<String>();
 		listBoampNameOfPDF.clear();
-		System.setProperty("javax.net.ssl.trustStore", "/Users/gkp/desktop/jssecacerts");
+		String AuthFileName = this.getClass().getClassLoader().getResource("jssecacerts").getPath();
+		System.setProperty("javax.net.ssl.trustStore",AuthFileName);
 		String url = "https://www.boamp.fr/avis/liste";
 		Map<String,String> params = new HashMap<String, String>();
-		params.put("nomacheteur", nomacheteur);
+		
+		//params.put(Const.CONF1,"0");
+		//params.put(Const.CONF2,"0");
+		
+		
+		for(String str : Const.listDescripteur) {
+			params.put(Const.DESCRIPTION, str);
+		}
+		
+		// 5 -> Cover all 1-4 options
+		params.put(Const.AVIS, "5");
+		
 		
 		// Get result
 		String result = sendPost(url, params);
 		Document doc = Jsoup.parse(result);
 		
+		/**
+		 *  To verify if the results exist in more than one page
+		 */
+		ArrayList<String> linksOfPages = new ArrayList<String>();
+		Elements elesPageIndex = doc.getElementsByAttributeValueStarting("href", "/avis/page?page=");
+		for(Element ele : elesPageIndex)
+		{
+			if(!linksOfPages.contains("https://www.boamp.fr" + ele.attr("href")))
+				linksOfPages.add("https://www.boamp.fr" + ele.attr("href"));
+		}
+		
+		
 		ArrayList<String> listLinks = new ArrayList<String>();
-		Elements hrefs = doc.getElementsByAttributeValueContaining("href","avis/detail/");
+		Elements hrefs = doc.getElementsByAttributeValueContaining("href","/avis/detail/");
 		for(Element href : hrefs) {
 			if(!listLinks.contains("https://www.boamp.fr" + href.attr("href")))
 				listLinks.add("https://www.boamp.fr" + href.attr("href"));
@@ -187,12 +210,11 @@ public class HTTPRequest {
             li.set("https://www.boamp.fr/avis/pdf/" + obj.toString().split("/")[length-2]);
             listBoampNameOfPDF.add(obj.toString().split("/")[length-2]);
         }
-        
         return listLinks;
 	}
 	
 	// get links from https://www.saint-etienne.fr/node/5659
-	private static ArrayList<String> getLinksST(String dateParution/*params add here*/) throws Exception{
+	private ArrayList<String> getLinksST(String dateParution/*params add here*/) throws Exception{
 		String url = "https://cg42.marches-publics.info/avis/index.cfm?fuseaction=pub.affResultats&IDs=11";
 		Map<String,String> params = new HashMap<String, String>();
 		params.put("dateParution", dateParution);
@@ -293,18 +315,15 @@ public class HTTPRequest {
 	
 	// An integrated function for crawling url
 	// => https://boamp.fr/avis/liste/
-	public static void boampScrawler() throws Exception {
-		ArrayList<String> links = getLinksBOAMP("SNCF");
-		resetDownloadNum();
-		for(int i=0;i<links.size();i++) {
-			download(links.get(i), listBoampNameOfPDF.get(i));
-		}
-		resetDownloadNum();
+	public void boampScrawler() throws Exception {
+		ArrayList<String> links = getLinksBOAMP();
+		System.out.println("Links(" + links.size() + ") correspond a PDF finded!!!!!");
+		
 	}
 	
 	// An integrated function for crawling url
 	// => https://saint-etienne.fr/node/5659/
-	public static void stScrawler() throws Exception {
+	public void stScrawler() throws Exception {
 		listAvisST = new ArrayList<AvisST>();
 		ArrayList<String> links = getLinksST("< 8");
 		resetCrawlUrlNum();
@@ -316,9 +335,11 @@ public class HTTPRequest {
 	
 	public static void main(String[] args) throws Exception 
 	{
-		//boampScrawler();
+		HTTPRequest http = new HTTPRequest();
+		http.boampScrawler();
 		
 		//stScrawler();
+		
 		
 	}
 	
