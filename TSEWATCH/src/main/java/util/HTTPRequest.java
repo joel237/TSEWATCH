@@ -104,8 +104,20 @@ public class HTTPRequest {
 			formparams.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 		}
 		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, Consts.UTF_8);
+		
 		// Generate a post request
 		HttpPost httpPost = new HttpPost(url);
+		if(url == Const.BOAMP) {
+			httpPost.setHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3");
+			httpPost.setHeader("Accept-Encoding","gzip, deflate, br");
+			httpPost.setHeader("Accept-Language","zh-CN,zh;q=0.9,zh-TW;q=0.8");
+			httpPost.setHeader("Connection","keep-alive");
+			httpPost.setHeader("Content-type","application/x-www-form-urlencoded");
+			httpPost.setHeader("Host","www.boamp.fr");
+			httpPost.setHeader("Referer","https://www.boamp.fr/recherche/avancee");
+			httpPost.setHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
+			
+		}
 		httpPost.setEntity(entity);
 		CloseableHttpResponse response = null;
 		
