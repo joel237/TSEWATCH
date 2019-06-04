@@ -30,11 +30,14 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -153,6 +156,53 @@ public class HTTPRequest {
 	      rd.close();
 	      return result.toString();
 	   }
+	
+	/**
+	 * 
+	 * @param url
+	 * @return html data
+	 * @throws Exception
+	 * This function is for sending the GET request to the site 
+	 * with a fake header and the delay of time 
+	 * to pass the anti-crawler program 
+	 */
+	public final static String sendGET(String url) throws Exception {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        
+        try {
+            HttpGet httpget = new HttpGet(url);
+            httpget.addHeader("Accept", "text/html");
+	    httpget.addHeader("Accept-Charset", "utf-8");
+            httpget.addHeader("Accept-Encoding", "gzip");
+	    httpget.addHeader("Accept-Language", "en-US,en");
+	    httpget.addHeader("User-Agent",
+			"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.160 Safari/537.22");
+            ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
+ 
+                public String handleResponse(
+                        final HttpResponse response) throws ClientProtocolException, IOException {
+                    int status = response.getStatusLine().getStatusCode();
+                    if (status >= 200 && status < 300) {
+                        HttpEntity entity = response.getEntity();
+                        System.out.println(status);
+                        return entity != null ? EntityUtils.toString(entity) : null;
+                    } else {
+                    	System.out.println(status);
+                    	Date date=new Date();
+                    	System.out.println(date);
+                    	System.exit(0);
+                        throw new ClientProtocolException("Unexpected response status: " + status);
+                    }
+                }
+            };
+            String responseBody = httpclient.execute(httpget, responseHandler);
+            Thread.currentThread();
+			Thread.sleep(200);
+            return responseBody;
+        } finally {
+            httpclient.close();
+        }
+    }
 
 	public static void main(String[] args) throws Exception 
 	{

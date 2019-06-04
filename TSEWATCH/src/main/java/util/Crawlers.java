@@ -97,11 +97,12 @@ public class Crawlers {
 	public static void main(String[] args) {
 		ArrayList<String> urls = new ArrayList<String>();
 		Crawlers crawler = new Crawlers();
-		urls = crawler.getLinksBOAMP();
-		
-		for(String url : urls) {
-			System.out.println(url);
-		}
+//		urls = crawler.getLinksBOAMP();
+//		
+//		for(String url : urls) {
+//			System.out.println(url);
+//		}
+		System.out.println(crawler.FranceMarcheCrawler());
 	}
 	
 	
@@ -134,7 +135,7 @@ public class Crawlers {
 	/**
 	 * Crawler for FranceMarche (ZHI's WORKING ON)
 	 */
-	public void FranceMarcheCrawler() {
+	public String FranceMarcheCrawler() {
 		//define the link's url to the website
 				String urlFM = "https://www.francemarches.com/search?search=";
 				
@@ -210,11 +211,16 @@ public class Crawlers {
 						+"%2526r%253Df%25252FtypeDePrestation%25252F"
 						+params.get(typeDePresentation1)
 						+"&search=&date=&alerte_Name=";
-				
-				
-				
+				String result = null;
+				try {
+					result = HTTPRequest.sendGET(urlFM);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(result);
 						
-				
+				return result;
 				
 	}
 	/*****************************************************/
@@ -235,6 +241,7 @@ public class Crawlers {
 	 * Crawler for Marchesonline
 	 */
 
+	
 }
 
 
