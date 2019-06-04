@@ -111,7 +111,7 @@ public class SendGet {
 	
 //test of the function
 	public static void main(String[] args) {
-		String url = "https://www.francemarches.com/search?search=";
+		String url = "https://www.francemarches.com/search?zr=f%2FtypeDAnnonce%2Faapc&c=q%253D%252523all%252BAND%252Bfm_class_date_cloture_dt%25253E%25253D2019-06-04%2526b%253D0%2526s%253D%2526sl%253Dxml%2526lang%253Dfr%2526hf%253D15%2526r%253Df%25252FtypeDAnnonce%25252Faapc%2526r%253Df%25252Flocalisation%25252Fauvergne-rhone-alpes%2526r%253Df%25252FtypeDAnnonce%25252Fautre&search=&date=&alerte_Name=";
 		
 		//get the content of the page
 		String result = null;
