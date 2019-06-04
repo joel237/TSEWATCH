@@ -27,8 +27,7 @@ public class Const {
 	
 	final static public String AVIS = "typeavis[]"; /****** typeavis[] : 1 ~ 5  ********/
 	
-	final static public String[] listDescripteur = {"mc68","mc97","mc453","mc454"
-											,"mc162","mc163","mc186","mc463","mc283","mc171"};
+	final static public String[] listDescripteur = {"mc68","mc97","mc453","mc454","mc162","mc163","mc186","mc463","mc283","mc171"};
 	
 	/****** ******/
 	final static public String DATESTART = "dateparutionmin";

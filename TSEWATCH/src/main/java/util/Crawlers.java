@@ -37,17 +37,18 @@ public class Crawlers {
 		
 		Map<String,String> params = new HashMap<String, String>();
 		
-		//params.put(Const.CONF1,"0");
-		//params.put(Const.CONF2,"0");
+		params.put(Const.CONF1,"0");
+		params.put(Const.CONF2,"0");
 		
 		// Add all the keywords corresponding
-		for(String str : Const.listDescripteur) {
-			params.put(Const.DESCRIPTION, str);
-		}
+//		for(String str : Const.listDescripteur) {
+//			params.put(Const.DESCRIPTION, str);
+//		}
+		params.put("descripteur[]", "mc38");
+		params.put("descripteur[]", "mc283");
 		
 		// 5 -> Cover all 1-4 options
 		params.put(Const.AVIS, "5");
-		
 		
 		// Get result
 		String result;
@@ -57,6 +58,8 @@ public class Crawlers {
 			/**
 			 *  To verify if the results exist in more than one page
 			 */
+			Elements test = doc.getElementsByClass("search-result-caption");
+			System.out.println(test.html());
 			ArrayList<String> linksOfPages = new ArrayList<String>();
 			Elements elesPageIndex = doc.getElementsByAttributeValueStarting("href", "/avis/page?page=");
 			for(Element ele : elesPageIndex)
@@ -79,6 +82,7 @@ public class Crawlers {
 	            int length = obj.toString().split("/").length;
 	            li.set("https://www.boamp.fr/avis/pdf/" + obj.toString().split("/")[length-2]);
 	        }
+	        System.out.println(listLinks.size());
 	        return listLinks;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -91,11 +95,13 @@ public class Crawlers {
 	}
 	
 	public static void main(String[] args) {
-		Date date=new Date();
-		System.out.println(date); 
-		SimpleDateFormat dateFormat=new SimpleDateFormat("YYYY-MM-dd");
-		System.out.println(dateFormat.format(date).toString()); 
+		ArrayList<String> urls = new ArrayList<String>();
+		Crawlers crawler = new Crawlers();
+		urls = crawler.getLinksBOAMP();
 		
+		for(String url : urls) {
+			System.out.println(url);
+		}
 	}
 	
 	
