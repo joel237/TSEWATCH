@@ -14,13 +14,14 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainpageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainpageController">
    <children>
       <TabPane layoutY="114.0" prefHeight="486.0" prefWidth="824.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-24.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -55,26 +56,63 @@
                                           </HBox>
                                        </children>
                                     </HBox>
+                                    <ImageView fx:id="logoImageView" fitHeight="70.0" fitWidth="148.0" layoutX="94.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="3.0" />
                                  </children>
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="798.0">
                                  <children>
                                     <Pane layoutX="-1.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <DatePicker layoutX="155.0" layoutY="91.0" prefHeight="25.0" prefWidth="94.0" />
-                                          <DatePicker layoutX="274.0" layoutY="92.0" prefHeight="25.0" prefWidth="94.0" />
-                                          <Text layoutX="32.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Avis" />
-                                          <Text layoutX="384.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type Marché" />
-                                          <ChoiceBox layoutX="155.0" layoutY="17.0" prefWidth="150.0" />
-                                          <ChoiceBox layoutX="519.0" layoutY="17.0" prefHeight="25.0" prefWidth="248.0" />
-                                          <Text layoutX="32.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom acheteur" />
-                                          <TextField layoutX="156.0" layoutY="54.0" />
-                                          <Text layoutX="386.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mots clés" />
-                                          <TextField layoutX="519.0" layoutY="58.0" prefHeight="77.0" prefWidth="248.0" />
-                                          <Text layoutX="32.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
-                                          <Text layoutX="260.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="à" />
-                                          <Text layoutX="25.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Région" />
-                                          <ChoiceBox layoutX="155.0" layoutY="132.0" prefWidth="150.0" />
+                                          <HBox layoutX="36.0" layoutY="33.0" spacing="120.0">
+                                             <children>
+                                                <VBox spacing="30.0">
+                                                   <children>
+                                                      <HBox spacing="50.0">
+                                                         <children>
+                                                            <Label prefHeight="27.0" prefWidth="61.0" text="Type Avis" />
+                                                            <ChoiceBox prefWidth="150.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox spacing="26.0">
+                                                         <children>
+                                                            <Label prefHeight="27.0" prefWidth="87.0" text="Nom acheteur" />
+                                                            <TextField prefHeight="27.0" prefWidth="148.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox spacing="20.0">
+                                                         <children>
+                                                            <Label prefHeight="27.0" prefWidth="29.0" text="Date" />
+                                                            <DatePicker prefHeight="25.0" prefWidth="94.0" />
+                                                            <Label prefHeight="27.0" prefWidth="9.0" text="à" />
+                                                            <DatePicker prefHeight="25.0" prefWidth="94.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox spacing="65.0">
+                                                         <children>
+                                                            <Label prefHeight="27.0" prefWidth="46.0" text="Région" />
+                                                            <ChoiceBox prefWidth="150.0" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox spacing="50.0">
+                                                   <children>
+                                                      <HBox spacing="15.0">
+                                                         <children>
+                                                            <Label prefHeight="27.0" prefWidth="81.0" text="Type Marché" />
+                                                            <ChoiceBox prefHeight="25.0" prefWidth="248.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="77.0" prefWidth="318.0" spacing="20.0">
+                                                         <children>
+                                                            <Label prefHeight="77.0" prefWidth="87.0" text="Mots clés" />
+                                                            <TextField prefHeight="77.0" prefWidth="270.0" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
                                        </children></Pane>
                                  </children>
                               </AnchorPane>
@@ -93,13 +131,29 @@
                             <TableColumn prefWidth="199.1999969482422" text="Axe de veille" />
                           </columns>
                         </TableView>
-                        <TextArea layoutX="335.0" layoutY="31.0" prefHeight="219.0" prefWidth="396.0" />
+                        <TextArea layoutX="311.0" layoutY="29.0" prefHeight="219.0" prefWidth="396.0" />
                         <Button layoutX="72.0" layoutY="259.0" mnemonicParsing="false" text="Ajouter" />
                         <Button layoutX="144.0" layoutY="259.0" mnemonicParsing="false" text="Modifier" />
-                        <TextField layoutX="335.0" layoutY="308.0" prefHeight="26.0" prefWidth="273.0" />
-                        <TextField layoutX="335.0" layoutY="354.0" prefHeight="133.0" prefWidth="275.0" />
-                        <Text layoutX="215.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de l'axe" />
-                        <Text layoutX="215.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mots clés (séparés par une virugle)" wrappingWidth="108.2601318359375" />
+                        <VBox layoutX="205.0" layoutY="308.0" spacing="20.0">
+                           <children>
+                              <HBox spacing="15.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="91.0" text="Nom de l'axe:">
+                                       <HBox.margin>
+                                          <Insets left="12.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="26.0" prefWidth="321.0" />
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="134.0" prefWidth="120.0" text="Mots clés " />
+                                    <TextField prefHeight="133.0" prefWidth="321.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                         <Button layoutX="360.0" layoutY="516.0" mnemonicParsing="false" text="Enregistrer les modifications" />
                      </children></AnchorPane>
             </content>
@@ -114,17 +168,25 @@
                             <TableColumn prefWidth="386.39996337890625" text="Lien téléchargeable" />
                           </columns>
                         </TableView>
-                        <ChoiceBox layoutX="151.0" layoutY="25.0" prefWidth="150.0" />
-                        <Text layoutX="66.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Axe de veille : " />
+                        <HBox layoutX="66.0" layoutY="25.0" spacing="10.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="27.0" prefWidth="93.0" text="Axe de veille : " />
+                              <ChoiceBox prefWidth="150.0" />
+                           </children>
+                        </HBox>
                         <Button layoutX="66.0" layoutY="512.0" mnemonicParsing="false" text="Nouveau Rapport" />
-                        <RadioButton layoutX="734.0" layoutY="99.0" mnemonicParsing="false" />
-                        <RadioButton layoutX="736.0" layoutY="238.0" mnemonicParsing="false" />
-                        <RadioButton layoutX="736.0" layoutY="238.0" mnemonicParsing="false" />
-                        <RadioButton layoutX="736.0" layoutY="238.0" mnemonicParsing="false" />
-                        <RadioButton layoutX="736.0" layoutY="208.0" mnemonicParsing="false" />
-                        <RadioButton layoutX="736.0" layoutY="179.0" mnemonicParsing="false" />
-                        <RadioButton layoutX="734.0" layoutY="155.0" mnemonicParsing="false" />
-                        <RadioButton layoutX="734.0" layoutY="127.0" mnemonicParsing="false" />
+                        <VBox layoutX="734.0" layoutY="99.0" spacing="8.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" />
+                              <RadioButton mnemonicParsing="false" />
+                              <RadioButton mnemonicParsing="false" />
+                              <RadioButton mnemonicParsing="false" />
+                              <RadioButton mnemonicParsing="false" />
+                              <RadioButton mnemonicParsing="false" />
+                              <RadioButton mnemonicParsing="false" />
+                              <RadioButton mnemonicParsing="false" />
+                           </children>
+                        </VBox>
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -132,17 +194,33 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="47.0" layoutY="476.0" mnemonicParsing="false" text="Ajouter" />
+                        <HBox layoutX="56.0" layoutY="43.0" spacing="5.0">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="117.0" text="Liste de diffusion : " />
+                              <ChoiceBox prefHeight="26.0" prefWidth="180.0" />
+                           </children>
+                        </HBox>
                         <TableView layoutX="47.0" layoutY="79.0" prefHeight="377.0" prefWidth="707.0">
                           <columns>
                             <TableColumn prefWidth="144.80001831054688" text="Client" />
                             <TableColumn prefWidth="434.3999938964844" text="Email" />
                           </columns>
                         </TableView>
-                        <Button layoutX="112.0" layoutY="476.0" mnemonicParsing="false" text="Supprimer" />
-                        <Button layoutX="194.0" layoutY="476.0" mnemonicParsing="false" text="Envoyer" textFill="#ed1717" />
-                        <ChoiceBox layoutX="160.0" layoutY="42.0" prefHeight="26.0" prefWidth="180.0" />
-                        <Text layoutX="47.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de diffusion : " />
+                        <HBox layoutX="484.0" layoutY="468.0" spacing="50.0" AnchorPane.topAnchor="468.0">
+                           <children>
+                              <HBox spacing="8.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Ajouter" />
+                                    <HBox>
+                                       <children>
+                                          <Button mnemonicParsing="false" text="Supprimer" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <Button mnemonicParsing="false" text="Envoyer" textFill="#ed1717" />
+                           </children>
+                        </HBox>
                      </children></AnchorPane>
               </content>
             </Tab>

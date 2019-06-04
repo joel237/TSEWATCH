@@ -154,7 +154,6 @@ public class HTTPRequest {
 	      return result.toString();
 	   }
 
-	
 	public static void main(String[] args) throws Exception 
 	{
 		/**
