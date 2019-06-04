@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
+import util.Const;
 
 public class MainpageController extends Application{
 	
@@ -21,9 +22,10 @@ public class MainpageController extends Application{
 		/**
 		 *  Add the sites we want in the main page
 		 */
-		sites.add("Boamp");
-		sites.add("Proxilegales");
-		sites.add("francemarches");
+		for(String name : Const.namesOfSites) {
+			sites.add(name);
+		}
+		
 		ObservableList<String> list = FXCollections.observableArrayList(sites);
 		siteList.setItems(list);
 	}

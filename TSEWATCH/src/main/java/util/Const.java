@@ -1,7 +1,20 @@
 package util;
 
 public class Const {
-
+	
+	/**
+	 *  Name list of websites we need to crawl 
+	 */
+	final static public String BOAMP = "https://www.boamp.fr/avis/liste";
+	
+	
+	final static public String[] namesOfSites = {
+			"Proxilegales", "Boamp" , "Marche-publics(info)",
+			"Marche-publics(gouv)", "Auvergnerhonealpes",
+			"Ted.europa","FranceMarche","E-marchespublics",
+			"Centraledesmarches","Marchesonline"
+	};
+	
 	/**
 	 *  Configurations for Boamp.fr
 	 */
