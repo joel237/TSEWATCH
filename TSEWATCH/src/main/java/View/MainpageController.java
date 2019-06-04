@@ -41,6 +41,11 @@ public class MainpageController extends Application{
 		siteList.setItems(list);
 	}
 	
+	@FXML
+	private void envoyerButtonClicked() {
+		
+	}
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
