@@ -1,0 +1,28 @@
+.root {
+     -fx-background-image: url("backG.jpg");
+}
+#back {
+    -fx-background-image: url("backG.png");
+}
+.forTab{
+    
+    -fx-margin-right: 5px;
+    
+    -fx-font-size: 0.9em;
+
+    -fx-border-radius: 10px 10px 0 0;
+    -fx-float: left;
+    
+    -fx-text-align: center;
+    -fx-cursor: pointer;
+    -fx-list-style : none;
+    -fx-transition: all 200ms;
+    -fx-border-top: 2px ;
+    -fx-border-right: 2px;
+    -fx-border-left: 2px;
+}
+
+.forTab:hover{
+    -fx-background: #888888;
+    -fx-color: #fff;
+}

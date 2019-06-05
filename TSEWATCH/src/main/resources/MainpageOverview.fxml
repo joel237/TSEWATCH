@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -13,7 +12,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -21,19 +19,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainpageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@backgroud.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainpageController">
    <children>
-      <TabPane layoutY="114.0" prefHeight="486.0" prefWidth="824.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-24.0" AnchorPane.topAnchor="0.0">
+      <TabPane prefHeight="500.0" prefWidth="800.0" styleClass="root" stylesheets="@backgroud.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab text="Recherche">
+          <Tab fx:id="rechercheTab" styleClass="forTab" text="Recherche">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="493.0" prefWidth="806.0">
                      <children>
-                        <SplitPane dividerPositions="0.13982300884955753" layoutX="205.0" layoutY="71.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane dividerPositions="0.1398" layoutX="205.0" layoutY="71.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" styleClass="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="800.0">
                                  <children>
-                                    <HBox layoutX="344.0" layoutY="24.0" spacing="8.0">
+                                    <HBox layoutX="344.0" layoutY="21.0" spacing="8.0">
                                        <children>
                                           <HBox prefHeight="27.0" prefWidth="321.0">
                                              <children>
@@ -50,20 +48,20 @@
                                           </HBox>
                                           <HBox spacing="8.0">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Options" />
+                                                <Button fx:id="optionsButton" mnemonicParsing="false" onAction="#optionsButtonClicked" text="Options" />
                                                 <Button mnemonicParsing="false" text="OK" />
                                              </children>
                                           </HBox>
                                        </children>
                                     </HBox>
-                                    <ImageView fx:id="logoImageView" fitHeight="70.0" fitWidth="148.0" layoutX="94.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="3.0" />
+                                    <ImageView fx:id="logoImageView" fitHeight="60.0" fitWidth="148.0" layoutX="94.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="4.0" />
                                  </children>
                               </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="798.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="798.0" stylesheets="@backgroud.css">
                                  <children>
-                                    <Pane layoutX="-1.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+                                    <Pane fx:id="optionsPane" layoutX="36.0" layoutY="33.0">
                                        <children>
-                                          <HBox layoutX="36.0" layoutY="33.0" spacing="120.0">
+                                          <HBox spacing="120.0">
                                              <children>
                                                 <VBox spacing="30.0">
                                                    <children>
@@ -113,7 +111,8 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                       </children></Pane>
+                                       </children>
+                                    </Pane>
                                  </children>
                               </AnchorPane>
                           </items>
@@ -122,9 +121,9 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Axe de veille">
+          <Tab fx:id="axeDeVeilleTab" styleClass="forTab" text="Axe de veille">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@TableViewDecorator.css">
                      <children>
                         <TableView layoutX="37.0" layoutY="31.0" prefHeight="215.0" prefWidth="200.0">
                           <columns>
@@ -158,11 +157,11 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Rapports">
+            <Tab fx:id="rapportsTab" onSelectionChanged="#nouveauRapportButtonClicked" styleClass="forTab" text="Rapports">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@TableViewDecorator.css">
                      <children>
-                        <TableView layoutX="66.0" layoutY="63.0" prefHeight="440.0" prefWidth="658.0">
+                        <TableView layoutX="66.0" layoutY="63.0" prefHeight="342.0" prefWidth="627.0">
                           <columns>
                             <TableColumn prefWidth="270.4000244140625" text="Date/Site" />
                             <TableColumn prefWidth="386.39996337890625" text="Lien téléchargeable" />
@@ -174,25 +173,13 @@
                               <ChoiceBox prefWidth="150.0" />
                            </children>
                         </HBox>
-                        <Button layoutX="66.0" layoutY="512.0" mnemonicParsing="false" text="Nouveau Rapport" />
-                        <VBox layoutX="734.0" layoutY="99.0" spacing="8.0">
-                           <children>
-                              <RadioButton mnemonicParsing="false" />
-                              <RadioButton mnemonicParsing="false" />
-                              <RadioButton mnemonicParsing="false" />
-                              <RadioButton mnemonicParsing="false" />
-                              <RadioButton mnemonicParsing="false" />
-                              <RadioButton mnemonicParsing="false" />
-                              <RadioButton mnemonicParsing="false" />
-                              <RadioButton mnemonicParsing="false" />
-                           </children>
-                        </VBox>
+                        <Button fx:id="nouveauRapportButton" layoutX="568.0" layoutY="421.0" mnemonicParsing="false" onAction="#nouveauRapportButtonClicked" text="Nouveau Rapport" />
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Diffusion Email">
+            <Tab fx:id="diffusionEmailTab" styleClass="forTab" text="Diffusion Email">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@TableViewDecorator.css">
                      <children>
                         <HBox layoutX="56.0" layoutY="43.0" spacing="5.0">
                            <children>
@@ -202,15 +189,15 @@
                         </HBox>
                         <TableView layoutX="47.0" layoutY="79.0" prefHeight="377.0" prefWidth="707.0">
                           <columns>
-                            <TableColumn prefWidth="144.80001831054688" text="Client" />
-                            <TableColumn prefWidth="434.3999938964844" text="Email" />
+                            <TableColumn prefWidth="241.0" text="Client" />
+                            <TableColumn prefWidth="465.0" text="Email" />
                           </columns>
                         </TableView>
                         <HBox layoutX="484.0" layoutY="468.0" spacing="50.0" AnchorPane.topAnchor="468.0">
                            <children>
                               <HBox spacing="8.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Ajouter" />
+                                    <Button fx:id="DEAjouterButton" mnemonicParsing="false" onAction="#DEAjouterButtonClicked" text="Ajouter" />
                                     <HBox>
                                        <children>
                                           <Button mnemonicParsing="false" text="Supprimer" />
@@ -218,7 +205,7 @@
                                     </HBox>
                                  </children>
                               </HBox>
-                              <Button mnemonicParsing="false" text="Envoyer" textFill="#ed1717" />
+                              <Button fx:id="envoyerButton" mnemonicParsing="false" onAction="#envoyerButtonClicked" text="Envoyer" textFill="#ed1717" />
                            </children>
                         </HBox>
                      </children></AnchorPane>
@@ -226,6 +213,5 @@
             </Tab>
         </tabs>
       </TabPane>
-      <TitledPane animated="false" layoutX="364.0" layoutY="-155.0" text="Ajouter un client" />
    </children>
 </AnchorPane>
