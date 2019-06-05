@@ -160,18 +160,22 @@
                                                 <TextField fx:id="keywordsTextField" prefHeight="133.0" prefWidth="321.0" />
                                              </children>
                                           </HBox>
+                                          <HBox spacing="10.0">
+                                             <children>
+                                                <Button fx:id="ADVAnnulerButton" mnemonicParsing="false" onAction="#ADVAnnulerButtonClicked" text="Annuler" />
+                                                <Button fx:id="ADVSaveButton" mnemonicParsing="false" onAction="#ADVSaveButtonClicked" text="Enregistrer" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="280.0" />
+                                             </padding>
+                                          </HBox>
                                        </children>
                                     </VBox>
-                                    <Button fx:id="ADVSaveButton" mnemonicParsing="false" onAction="#ADVSaveButtonClicked" text="Enregistrer">
-                                       <VBox.margin>
-                                          <Insets left="355.0" top="5.0" />
-                                       </VBox.margin>
-                                    </Button>
                                  </children>
                               </VBox>
                            </children>
                         </Pane>
-                        <Label fx:id="ADVWarningLabel" layoutX="710.0" layoutY="470.0" text="Existe déjà" textFill="RED">
+                        <Label fx:id="ADVWarningLabel" layoutX="719.0" layoutY="478.0" text="Existe déjà" textFill="RED">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>

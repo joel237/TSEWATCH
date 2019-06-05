@@ -80,6 +80,9 @@ public class MainpageController extends Application{
 	@FXML
 	private Button ADVSaveButton;
 	@FXML
+	private Button ADVAnnulerButton;
+	
+	@FXML
 	private TextField nameVeilleTextField;
 	@FXML
 	private TextField keywordsTextField;
@@ -185,6 +188,15 @@ public class MainpageController extends Application{
 		hideOptionsFlag = !hideOptionsFlag;
 		optionsPane.setVisible(hideOptionsFlag);
 		
+	}
+	
+	@FXML
+	private void ADVAnnulerButtonClicked() {
+		nameVeilleTextField.setText("");
+		keywordsTextField.setText("");
+		
+		hideAddModifyFlag = !hideAddModifyFlag;
+		addModifyPane.setVisible(hideAddModifyFlag);		
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
