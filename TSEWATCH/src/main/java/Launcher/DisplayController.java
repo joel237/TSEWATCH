@@ -20,7 +20,7 @@ public class DisplayController extends Application{
 	private BorderPane rootLayout;
 	//private static RootLayoutController rootLayCrtl;
 	private static DisplayController instance;
-	
+	private static Stage sendMailStage;
 	public static void display(String[] args) {
 		launch(args);
 	}
@@ -63,8 +63,32 @@ public class DisplayController extends Application{
 		
 	}
 	
-	public void showSendMain() {
-		
+	public static DisplayController getInstance() {
+		return instance;
+	}
+
+	public static void setInstance(DisplayController instance) {
+		DisplayController.instance = instance;
+	}
+
+	public void showSendMail() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(this.getClass().getClassLoader().getResource("SendMail.fxml"));
+			AnchorPane sendMailPane = (AnchorPane) loader.load();
+			sendMailStage = new Stage();
+			Scene scene = new Scene(sendMailPane);
+			sendMailStage.setTitle("Send EMAIL");
+			sendMailStage.setScene(scene);
+			sendMailStage.show();			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void closeSendMailStage() {
+		sendMailStage.close();
 	}
 
 	@Override
