@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -25,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@backgroud.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainpageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@backgroud.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainpageController">
    <children>
       <TabPane prefHeight="500.0" prefWidth="800.0" styleClass="root" stylesheets="@backgroud.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -37,7 +32,7 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="800.0">
                                  <children>
-                                    <HBox layoutX="344.0" layoutY="21.0" spacing="8.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="22.0">
+                                    <HBox layoutX="344.0" layoutY="21.0" spacing="8.0">
                                        <children>
                                           <HBox prefHeight="27.0" prefWidth="321.0">
                                              <children>
@@ -54,7 +49,7 @@
                                           </HBox>
                                           <HBox spacing="8.0">
                                              <children>
-                                                <Button fx:id="optionsButton" mnemonicParsing="false" onAction="#optionsButtonClicked" text="Options" />
+                                                <JFXButton fx:id="optionsButton" buttonType="RAISED" onAction="#optionsButtonClicked" ripplerFill="#8a0b4b" text="Options" underline="true" />
                                                 <Button mnemonicParsing="false" text="OK" />
                                              </children>
                                           </HBox>
@@ -65,7 +60,7 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="798.0" stylesheets="@backgroud.css">
                                  <children>
-                                    <Pane fx:id="optionsPane" layoutX="36.0" layoutY="33.0" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="12.0">
+                                    <Pane fx:id="optionsPane" layoutX="36.0" layoutY="33.0">
                                        <children>
                                           <HBox spacing="120.0">
                                              <children>
@@ -131,35 +126,56 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@TableViewDecorator.css">
                      <children>
-                        <TableView layoutX="37.0" layoutY="31.0" prefHeight="215.0" prefWidth="200.0" AnchorPane.bottomAnchor="265.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="563.0" AnchorPane.topAnchor="31.0">
+                        <TableView fx:id="veilleTableView" layoutX="37.0" layoutY="31.0" prefHeight="215.0" prefWidth="200.0">
                           <columns>
-                            <TableColumn prefWidth="199.1999969482422" text="Axe de veille" />
+                            <TableColumn fx:id="colVeille" prefWidth="199.1999969482422" text="Axe de veille" />
                           </columns>
                         </TableView>
-                        <TextArea layoutX="311.0" layoutY="29.0" prefHeight="219.0" prefWidth="396.0" AnchorPane.bottomAnchor="263.0" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="29.0" />
-                        <Button layoutX="72.0" layoutY="259.0" mnemonicParsing="false" text="Ajouter" />
-                        <Button layoutX="144.0" layoutY="259.0" mnemonicParsing="false" text="Modifier" />
-                        <VBox layoutX="205.0" layoutY="308.0" spacing="20.0">
+                        <Pane fx:id="infoAxePane" layoutX="311.0" layoutY="29.0">
                            <children>
-                              <HBox spacing="15.0">
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="28.0" prefWidth="91.0" text="Nom de l'axe:">
-                                       <HBox.margin>
-                                          <Insets left="12.0" />
-                                       </HBox.margin>
-                                    </Label>
-                                    <TextField prefHeight="26.0" prefWidth="321.0" />
-                                 </children>
-                              </HBox>
-                              <HBox>
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="134.0" prefWidth="120.0" text="Mots clés " />
-                                    <TextField prefHeight="133.0" prefWidth="321.0" />
-                                 </children>
-                              </HBox>
+                              <TextArea fx:id="displayKeywordsTextArea" prefHeight="219.0" prefWidth="396.0" />
                            </children>
-                        </VBox>
-                        <Button layoutX="360.0" layoutY="516.0" mnemonicParsing="false" text="Enregistrer les modifications" />
+                        </Pane>
+                        <Button fx:id="ADVAjouterButton" layoutX="72.0" layoutY="259.0" mnemonicParsing="false" onAction="#ADVAjouterButtonClicked" text="Ajouter" />
+                        <Button fx:id="ADVModifierButton" layoutX="144.0" layoutY="259.0" mnemonicParsing="false" onAction="#ADVModifierButtonClicked" text="Modifier" />
+                        <Pane fx:id="addModifyPane" layoutX="266.0" layoutY="273.0">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <VBox spacing="20.0">
+                                       <children>
+                                          <HBox spacing="15.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="91.0" text="Nom de l'axe:">
+                                                   <HBox.margin>
+                                                      <Insets left="12.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <TextField fx:id="nameVeilleTextField" prefHeight="26.0" prefWidth="321.0" />
+                                             </children>
+                                          </HBox>
+                                          <HBox>
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="134.0" prefWidth="120.0" text="Mots clés " />
+                                                <TextField fx:id="keywordsTextField" prefHeight="133.0" prefWidth="321.0" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <Button fx:id="ADVSaveButton" mnemonicParsing="false" onAction="#ADVSaveButtonClicked" text="Enregistrer">
+                                       <VBox.margin>
+                                          <Insets left="355.0" top="5.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                        <Label fx:id="ADVWarningLabel" layoutX="710.0" layoutY="470.0" text="Existe déjà" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
             </content>
           </Tab>
