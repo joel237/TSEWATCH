@@ -109,9 +109,11 @@ public class Crawlers {
 	/*****************************************************/
 	
 	/**
-	 * Crawler for Marche-publics(info)
+	 * Crawler for Marche-publics(info)(ZHI's WORKING ON)
 	 */
-	
+	public void MarchepublicsInfoCrawler() {
+		
+	}
 	/*****************************************************/
 	
 	/**
@@ -135,7 +137,7 @@ public class Crawlers {
 	/**
 	 * Crawler for FranceMarche (ZHI's WORKING ON)
 	 */
-	public String FranceMarcheCrawler() {
+ 	public String FranceMarcheCrawler() {
 		//define the link's url to the website
 				String urlFM = "https://www.francemarches.com/search?search=";
 				
