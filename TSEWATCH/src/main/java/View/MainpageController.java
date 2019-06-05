@@ -322,6 +322,9 @@ public class MainpageController extends Application{
 			veilleSelecting.setName(nameVeilleTextField.getText());
 			veilleSelecting.setKeywords(listKeywords);
 			
+			veilleTableView.getColumns().get(0).setVisible(false);
+			veilleTableView.getColumns().get(0).setVisible(true);
+			
 		}else {
 			if(addVeille2List()) {
 				veilleList.add(veilleCreating);
