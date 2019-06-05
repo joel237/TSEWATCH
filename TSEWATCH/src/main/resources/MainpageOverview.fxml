@@ -157,7 +157,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="rapportsTab" styleClass="forTab" text="Rapports">
+            <Tab fx:id="rapportsTab" onSelectionChanged="#nouveauRapportButtonClicked" styleClass="forTab" text="Rapports">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@TableViewDecorator.css">
                      <children>
@@ -173,7 +173,7 @@
                               <ChoiceBox prefWidth="150.0" />
                            </children>
                         </HBox>
-                        <Button layoutX="568.0" layoutY="421.0" mnemonicParsing="false" text="Nouveau Rapport" />
+                        <Button fx:id="nouveauRapportButton" layoutX="568.0" layoutY="421.0" mnemonicParsing="false" onAction="#nouveauRapportButtonClicked" text="Nouveau Rapport" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -197,7 +197,7 @@
                            <children>
                               <HBox spacing="8.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Ajouter" />
+                                    <Button fx:id="DEAjouterButton" mnemonicParsing="false" onAction="#DEAjouterButtonClicked" text="Ajouter" />
                                     <HBox>
                                        <children>
                                           <Button mnemonicParsing="false" text="Supprimer" />

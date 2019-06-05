@@ -27,8 +27,8 @@
       </VBox>
       <HBox layoutX="94.0" layoutY="141.0" spacing="80.0">
          <children>
-            <Button fx:id="SMAnnulerButton" mnemonicParsing="false" onAction="#SMAnnulerButtonClicked" text="Annuler" />
-            <Button mnemonicParsing="false" text="Envoyer" />
+            <Button fx:id="SMAnnulerButton" cancelButton="true" mnemonicParsing="false" onAction="#SMAnnulerButtonClicked" text="Annuler" />
+            <Button defaultButton="true" mnemonicParsing="false" text="Envoyer" />
          </children>
       </HBox>
    </children>

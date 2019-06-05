@@ -2,6 +2,7 @@ package View;
 
 import Launcher.DisplayController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 public class SendMailController {
 	
@@ -16,9 +17,9 @@ public class SendMailController {
 		displayCtrl = DisplayController.getInstance();
 	}
 	
-	
-	@FXML 
-	private void SMAnnulerButtonClicked() {
+	@FXML
+	public void SMAnnulerButtonClicked() {
 		displayCtrl.closeSendMailStage();
 	}
+	
 }

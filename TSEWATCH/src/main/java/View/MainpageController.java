@@ -43,6 +43,10 @@ public class MainpageController extends Application{
 	@FXML
 	private Button SMAnnulerButton;
 	@FXML
+	private Button DEAjouterButton;
+	@FXML 
+	private Button nouveauRapportButton;
+	@FXML
 	private Tab rechercheTab;
 	@FXML
 	private Tab axeDeVeilleTab;
@@ -82,7 +86,7 @@ public class MainpageController extends Application{
 		
 	}
 	
-	public void tabChangedColorWhenSelected() {
+	private void tabChangedColorWhenSelected() {
 		rechercheTab.setStyle("-fx-background-image: url(\"backG.jpg\");");
 		
 		diffusionEmailTab.setOnSelectionChanged(event->{
@@ -134,11 +138,19 @@ public class MainpageController extends Application{
 	}
 	
 	@FXML
+	private void DEAjouterButtonClicked() {
+		displayCtrl.showAddClient();
+	}
+	
+	@FXML
 	private void envoyerButtonClicked() {
-		
 		displayCtrl.showSendMail();
 	}
 	
+	@FXML
+	private void nouveauRapportButtonClicked() {
+		displayCtrl.showAddReport();
+	}
 	
 	
 	@Override
