@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.ListIterator;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import Model.Avis;
 import Model.AvisST;
 
 public class Crawlers {
@@ -102,7 +104,12 @@ public class Crawlers {
 //		for(String url : urls) {
 //			System.out.println(url);
 //		}
-		System.out.println(crawler.FranceMarcheCrawler());
+		//System.out.println(crawler.FranceMarcheCrawler());
+		
+		ArrayList<Avis> avisList = crawler.FranceMarcheCrawler();
+		for(Avis avis:avisList) {
+			avis.print();
+		}
 	}
 	
 	
@@ -135,12 +142,15 @@ public class Crawlers {
 	/*****************************************************/
 	
 	/**
-	 * Crawler for FranceMarche (ZHI's WORKING ON)
+	 * Crawler for FranceMarche
+	 * @author ZHI
+	 * @param
+	 * @return list of the avis
 	 */
- 	public String FranceMarcheCrawler() {
+ 	public ArrayList<Avis> FranceMarcheCrawler() {
 		//define the link's url to the website
 				String urlFM = "https://www.francemarches.com/search?search=";
-				
+			
 				//define the map of the parametres(settings)
 				Map<String,String> params = new HashMap<String, String>();
 				
@@ -202,17 +212,17 @@ public class Crawlers {
 						+params.get("date_parution_fin")
 						+"&c=q%253D%252523all%252BAND%252Bfm_class_date_cloture_dt%25253E%25253D"
 						+params.get("date_local")
-						+"%2526b%253D0%2526s%253D%2526sl%253Dxml%2526lang%253Dfr%2526hf%253D15%2526r%253Df%25252Flocalisation%25252F"
-						+params.get("localisation1")
-						+"%2526r%253Df%25252Flocalisation%25252F"
-						+params.get("localisation2")
-						+"%2526r%253Df%25252FtypeDAnnonce%25252F"
-						+params.get("typeDAnnonce1")
+						+"%2526b%253D0%2526s%253D%2526sl%253Dxml%2526lang%253Dfr%2526hf%253D15%2526r%253Df%25252FtypeDePrestation%25252F"
+						+params.get("typeDePresentation1")
 						+"%2526r%253Df%25252FtypeDAnnonce%25252F"
 						+params.get("typeDAnnonce2")
+						+"%2526r%253Df%25252FsecteurDActivite%25252Fservices%252Bde%252Btechnologies%252Bde%252Bl%252527information%25252C%252Bconseil%25252C%252Bdeveloppement%252Bde%252Blogiciels%25252C%252Binternet%252Bet%252Bappui%2526r%253Df%25252F"
+						+"localisation%25252F"
+						+params.get("localisation1")
 						+"%2526r%253Df%25252FtypeDePrestation%25252F"
-						+params.get(typeDePresentation1)
+						+params.get("typeDePresentation2")
 						+"&search=&date=&alerte_Name=";
+				//System.out.println(urlFM);
 				String result = null;
 				try {
 					result = HTTPRequest.sendGET(urlFM);
@@ -220,9 +230,132 @@ public class Crawlers {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println(result);
-						
-				return result;
+				//System.out.println(result);
+				
+				//parse the HTML data
+				Document doc = Jsoup.parse(result);
+				ArrayList<String> listLinks = new ArrayList<String>();
+				ArrayList<String> listTitre = new ArrayList<String>();
+				ArrayList<String> listDate = new ArrayList<String>();
+				
+				Elements eles = doc.getElementsByAttributeValueStarting("href", "https://www.francemarches.com/appel-offre/");
+				for(Element ele : eles) {
+					listLinks.add(ele.attr("href"));
+				}				
+				
+				Elements eles2 = doc.getElementsByClass("dateParution");
+				
+				for(Element ele : eles2) {
+					//System.out.println(ele.text());
+					listDate.add(ele.text());
+				}
+				Elements elesTitre = doc.getElementsByClass("titre");
+
+				for(Element ele : elesTitre) {
+					//System.out.println(ele.text());
+					listTitre.add(ele.text());
+				}
+				//using LinkedHashSet to delete the repeated members
+				LinkedHashSet<String> setLinks = new LinkedHashSet<String>(listLinks);
+				listLinks = new ArrayList<String>(setLinks);
+				LinkedHashSet<String> setTitre = new LinkedHashSet<String>(listTitre);
+				listTitre = new ArrayList<String>(setTitre);
+
+				
+//				System.out.println(listLinks);
+//				System.out.println(listTitre);
+//				System.out.println(listDate);
+				
+				//create the list fo the avis
+				ArrayList<Avis> avisList = new ArrayList<Avis>();
+				for(int i = 0;i<listLinks.size();i++) {
+					avisList.add(new Avis(listDate.get(i),listTitre.get(i),listLinks.get(i)));
+				}
+				
+				
+				System.out.println(avisList.size());
+				
+				/**for the others pages**/
+				
+				//define the number of the pages(including the first page)
+				int pageNum = 2;
+				//for the others pages
+				for(int i=1;i<pageNum;i++) {
+					
+					//define the url of the other pages
+					urlFM = "https://www.francemarches.com/search?c=q%253D%252523all%252BAND%252Bfm_class_date_cloture_dt%25253E%25253D"
+							+params.get("date_local")
+							+"%252BAND%252Bfm_class_date_parution_dt%25253E%25253D"
+							+params.get("date_parution_debut")
+							+"%252BAND%252Bfm_class_date_parution_dt%25253C%25253D"
+							+params.get("date_parution_fin")
+							+"%2526b%253D"
+							+15*(i-1)
+							+"%2526s%253D%2526sl%253Dxml%2526lang%253Dfr%2526hf%253D15%2526r%253Df%25252FtypeDePrestation%25252F"
+							+params.get("typeDePresentation1")
+							+"%2526r%253Df%25252FtypeDAnnonce%25252F"
+							+params.get("typeDAnnonce2")
+							+"%2526r%253Df%25252FsecteurDActivite%25252Fservices%252Bde%252Btechnologies%252Bde%252Bl%252527information%25252C%252Bconseil%25252C%252Bdeveloppement%252Bde%252Blogiciels%25252C%252Binternet%252Bet%252Bappui"
+							+"%2526r%253Df%25252Flocalisation%25252F"
+							+params.get("localisation1")
+							+"%2526r%253Df%25252FtypeDePrestation%25252F"
+							+params.get("typeDePresentation2")
+							+"&b="
+							+15*i
+							+"&s=&sa=&search=&date_parution_debut=%3E="
+							+params.get("date_parution_debut")
+							+"&date_parution_fin=%3C="
+							+params.get("date_parution_fin");
+					
+					//System.out.println(urlFM);
+					
+					try {
+						result = HTTPRequest.sendGET(urlFM);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					//parse the HTML data
+					Document doc2 = Jsoup.parse(result);
+					ArrayList<String> listLinks2 = new ArrayList<String>();
+					ArrayList<String> listTitre2 = new ArrayList<String>();
+					ArrayList<String> listDate2 = new ArrayList<String>();
+					
+					Elements eles3 = doc2.getElementsByAttributeValueStarting("href", "https://www.francemarches.com/appel-offre/");
+					for(Element ele : eles3) {
+						listLinks2.add(ele.attr("href"));
+					}
+					
+					Elements eles4 = doc2.getElementsByClass("dateParution");
+					
+					for(Element ele : eles4) {
+						//System.out.println(ele.text());
+						listDate2.add(ele.text());
+					}
+					
+					Elements eles5 = doc2.getElementsByClass("titre");
+					for(Element ele : eles5) {
+						//System.out.println(ele.text());
+						listTitre2.add(ele.text());
+					}
+					//using LinkedHashSet to delete the repeated members
+					 setLinks = new LinkedHashSet<String>(listLinks2);
+					listLinks2 = new ArrayList<String>(setLinks);
+					 setTitre = new LinkedHashSet<String>(listTitre2);
+					listTitre2 = new ArrayList<String>(setTitre);
+					
+//					System.out.println(listLinks2);
+//					System.out.println(listTitre2);
+//					System.out.println(listDate2);
+					for(int j = 0;j<listLinks2.size();j++) {
+						avisList.add(new Avis(listDate2.get(j),listTitre2.get(j),listLinks2.get(j)));
+					}
+					
+				}
+				
+				System.out.println(avisList.size());
+				return avisList;
 				
 	}
 	/*****************************************************/

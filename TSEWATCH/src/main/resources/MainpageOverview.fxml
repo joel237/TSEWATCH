@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -19,7 +25,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@backgroud.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainpageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" stylesheets="@backgroud.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainpageController">
    <children>
       <TabPane prefHeight="500.0" prefWidth="800.0" styleClass="root" stylesheets="@backgroud.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -31,7 +37,7 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="800.0">
                                  <children>
-                                    <HBox layoutX="344.0" layoutY="21.0" spacing="8.0">
+                                    <HBox layoutX="344.0" layoutY="21.0" spacing="8.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="22.0">
                                        <children>
                                           <HBox prefHeight="27.0" prefWidth="321.0">
                                              <children>
@@ -59,7 +65,7 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="798.0" stylesheets="@backgroud.css">
                                  <children>
-                                    <Pane fx:id="optionsPane" layoutX="36.0" layoutY="33.0">
+                                    <Pane fx:id="optionsPane" layoutX="36.0" layoutY="33.0" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="12.0">
                                        <children>
                                           <HBox spacing="120.0">
                                              <children>
@@ -125,12 +131,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@TableViewDecorator.css">
                      <children>
-                        <TableView layoutX="37.0" layoutY="31.0" prefHeight="215.0" prefWidth="200.0">
+                        <TableView layoutX="37.0" layoutY="31.0" prefHeight="215.0" prefWidth="200.0" AnchorPane.bottomAnchor="265.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="563.0" AnchorPane.topAnchor="31.0">
                           <columns>
                             <TableColumn prefWidth="199.1999969482422" text="Axe de veille" />
                           </columns>
                         </TableView>
-                        <TextArea layoutX="311.0" layoutY="29.0" prefHeight="219.0" prefWidth="396.0" />
+                        <TextArea layoutX="311.0" layoutY="29.0" prefHeight="219.0" prefWidth="396.0" AnchorPane.bottomAnchor="263.0" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="29.0" />
                         <Button layoutX="72.0" layoutY="259.0" mnemonicParsing="false" text="Ajouter" />
                         <Button layoutX="144.0" layoutY="259.0" mnemonicParsing="false" text="Modifier" />
                         <VBox layoutX="205.0" layoutY="308.0" spacing="20.0">
