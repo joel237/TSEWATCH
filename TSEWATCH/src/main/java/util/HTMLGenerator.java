@@ -102,6 +102,7 @@ public class HTMLGenerator {
 		                new NoTag(this, "Rapport");
 		            }};
 		        }};
+		        
 		        new Div(this,
 		            new Id("main")) {{
 		            new Header(this,
