@@ -33,8 +33,12 @@
 	    <groupId>com.jfoenix</groupId>
 	    <artifactId>jfoenix</artifactId>
 	    <version>8.0.7</version>
-	</dependency>
-
-	
+	</dependency>	 
+    <dependency>
+        <groupId>com.mailjet</groupId>
+        <artifactId>mailjet-client</artifactId>
+        <version>4.2.0</version>
+    </dependency>
+    
   	</dependencies>
 </project>

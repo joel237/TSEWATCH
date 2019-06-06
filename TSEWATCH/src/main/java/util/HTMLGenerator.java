@@ -102,6 +102,7 @@ public class HTMLGenerator {
 		                new NoTag(this, "Rapport");
 		            }};
 		        }};
+		        
 		        new Div(this,
 		            new Id("main")) {{
 		            new Header(this,
@@ -246,7 +247,7 @@ public class HTMLGenerator {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ArrayList<Avis> list2Test = new ArrayList<Avis>();
+ArrayList<Avis> list2Test = new ArrayList<Avis>();
 		
 		// Date,Titre,Lien
 		list2Test.add(new Avis("06/06/2019", "Titre d'avis1", "https://www.google.com"));
