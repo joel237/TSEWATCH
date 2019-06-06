@@ -34,11 +34,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -86,7 +89,7 @@ public class HTTPRequest {
 		disableCertificateValidation();
 		// Get a httpClient object
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-	    
+		httpclient = (CloseableHttpClient)wrapClient(httpclient); 
 		// Creat a list to store params
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
 		for(Map.Entry<String, String> entry : params.entrySet()) {
@@ -128,6 +131,33 @@ public class HTTPRequest {
 		}
 		return result;
 	}
+	
+	
+	public static HttpClient wrapClient(HttpClient base) {  
+	    try {  
+	        SSLContext ctx = SSLContext.getInstance("TLS");  
+	        X509TrustManager tm = new X509TrustManager() {  
+	            public X509Certificate[] getAcceptedIssuers() {  
+	                return null;  
+	            }  
+
+	            public void checkClientTrusted(X509Certificate[] arg0,  
+	                    String arg1) throws CertificateException {  
+	            }  
+
+	            public void checkServerTrusted(X509Certificate[] arg0,  
+	                    String arg1) throws CertificateException {  
+	            }  
+	        };  
+	        ctx.init(null, new TrustManager[] { tm }, null);  
+	        SSLConnectionSocketFactory ssf = new SSLConnectionSocketFactory(ctx,NoopHostnameVerifier.INSTANCE);  
+	        CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(ssf).build();  
+	        return httpclient;  
+	    } catch (Exception ex) {  
+	        ex.printStackTrace();  
+	        return HttpClients.createDefault();  
+	    }  
+	}  
 	
 	public static String getHTML(String urlToRead) throws Exception {
 	      StringBuilder result = new StringBuilder();
