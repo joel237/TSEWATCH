@@ -23,7 +23,11 @@
 	    <artifactId>jsoup</artifactId>
 	    <version>1.12.1</version>
 	</dependency>
-	
+	<dependency>
+		<groupId>com.webfirmframework</groupId>
+		<artifactId>wffweb</artifactId>
+		<version>RELEASE</version>
+  	</dependency>
 	<!-- https://mvnrepository.com/artifact/com.jfoenix/jfoenix -->
 	<dependency>
 	    <groupId>com.jfoenix</groupId>

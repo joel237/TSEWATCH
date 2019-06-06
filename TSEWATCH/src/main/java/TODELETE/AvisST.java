@@ -1,4 +1,4 @@
-package Model;
+package TODELETE;
 
 public class AvisST {
 	private String title;

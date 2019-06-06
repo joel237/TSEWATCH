@@ -24,6 +24,7 @@ public class DisplayController extends Application{
 	 * Show the Mainpage Overview inside the root layout
 	 */
 	public void showMainpageOverview() {
+		primaryStage.setResizable(false);
 		try {
 			// Load person overview
 			FXMLLoader loader = new FXMLLoader();

@@ -103,6 +103,7 @@ public class MainpageController extends Application{
 	
 	@FXML
 	public void initialize() {
+		
 		ADVWarningLabel.setVisible(false);
 		colVeille.setText("Liste des veilles");
 		colVeille.setCellValueFactory(new PropertyValueFactory<>("name"));

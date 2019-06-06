@@ -48,23 +48,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import Model.AvisST;
 
 public class HTTPRequest {
 	
-	 
-	private static int downloadNum = 0;
-	
-	private static int crawlUrlNum = 0;
-	
-	private static ArrayList<String> listBoampNameOfPDF = null;
-	
-	private static ArrayList<AvisST> listAvisST = null;
-	
-	private static String USER_AGENT = "Mozilla/5.0"; 
-	
-	
-
 	public static void disableCertificateValidation() {
 		    // Create a trust manager that does not validate certificate chains
 		    TrustManager[] trustAllCerts = new TrustManager[] { 
