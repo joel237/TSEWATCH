@@ -93,22 +93,22 @@ public class Crawlers {
 //		}
 		// System.out.println(crawler.FranceMarcheCrawler());
 
-//		ArrayList<Avis> avisList = crawler.FranceMarcheCrawler("auvergne-rhone-alpes","2019-05-01","2019-06-01",2);
-
-		ArrayList<Avis> avisList = crawler.proxiLegalesCrawler("orange", 2);
-
+//		ArrayList<Avis> avisList = crawler.franceMarcheCrawler("auvergne-rhone-alpes","2019-05-01","2019-06-01",2);
+//		ArrayList<Avis> avisList = crawler.proxiLegalesCrawler("orange", 2);
 //		ArrayList<Avis> avisList = crawler.marchepublicsInfoCrawler("1,3,7,15,26,38,42,43,63,69,73,74","= 0");
 		
+		crawler.marchepublicGouvCrawler();
 		
 		
-		for(Avis avis:avisList) {
-			avis.print();
-		}
+		
+//		for(Avis avis:avisList) {
+//			avis.print();
+//		}
 	}
 
 	/*****************************************************/
 	/**
-	 * Crawler for ProxiLegales(not finished)
+	 * Crawler for ProxiLegales
 	 * 
 	 * @author ZHI
 	 * @param the key words and the number of the pages(including the first page) we
@@ -350,7 +350,8 @@ public class Crawlers {
 		ArrayList<String> listLinks = new ArrayList<String>();
 		ArrayList<String> listTitre = new ArrayList<String>();
 		ArrayList<String> listDate = new ArrayList<String>();
-
+		//ArrayList<String> listLocation = new ArrayList<String>();
+		
 		// get the links from the HTML data
 		Elements eles_links = doc.getElementsByAttributeValueStarting("href",
 				"index.cfm?fuseaction=pub.affPublication");
@@ -383,6 +384,9 @@ public class Crawlers {
 				listDate.add(ele1.text());
 			}
 		}
+		
+		
+		
 
 //		System.out.println(listLinks.size());
 //		System.out.println(listTitre.size());
@@ -418,8 +422,39 @@ public class Crawlers {
 
 	/**
 	 * Crawler for Marche-publics(gouv)
+	 * @author ZHI
+	 * 
+	 * 
 	 */
+	public void marchepublicGouvCrawler() {
+		// define the url of the site
+		String urlMPI = "https://www.marches-publics.gouv.fr/?page=entreprise.EntrepriseAdvancedSearch&searchAnnCons";
+		
+		/*
+		 *  ctl0$CONTENU_PAGE$AdvancedSearch$dateMiseEnLigneCalculeStart: 01/06/2019
+			ctl0$CONTENU_PAGE$AdvancedSearch$dateMiseEnLigneCalculeEnd: 06/06/2019
+			ctl0$CONTENU_PAGE$AdvancedSearch$procedureType: 1
 
+		 */
+		// define the map of the settings
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("ctl0$CONTENU_PAGE$AdvancedSearch$dateMiseEnLigneCalculeStart", "01/06/2019");
+		params.put("ctl0$CONTENU_PAGE$AdvancedSearch$dateMiseEnLigneCalculeEnd", "06/06/2019");
+		params.put("ctl0$CONTENU_PAGE$AdvancedSearch$procedureType", "1");
+		
+		String result = null;
+		// send POST request to the site to get the HTML data
+		try {
+			result = HTTPRequest.sendPost(urlMPI, params);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		
+		
+		
+	}
 	/*****************************************************/
 
 	/**
@@ -532,6 +567,7 @@ public class Crawlers {
 		ArrayList<String> listLinks = new ArrayList<String>();
 		ArrayList<String> listTitre = new ArrayList<String>();
 		ArrayList<String> listDate = new ArrayList<String>();
+		ArrayList<String> listLocation = new ArrayList<String>();
 
 		Elements eles = doc.getElementsByAttributeValueStarting("href", "https://www.francemarches.com/appel-offre/");
 		for (Element ele : eles) {
@@ -550,6 +586,13 @@ public class Crawlers {
 			// System.out.println(ele.text());
 			listTitre.add(ele.text());
 		}
+		
+		
+		Elements elesLocation = doc.getElementsByClass("localisation");
+		for (Element ele : elesLocation) {
+			// System.out.println(ele.text());
+			listLocation.add(ele.text());
+		}
 		// using LinkedHashSet to delete the repeated members
 		LinkedHashSet<String> setLinks = new LinkedHashSet<String>(listLinks);
 		listLinks = new ArrayList<String>(setLinks);
@@ -563,7 +606,7 @@ public class Crawlers {
 		// create the list fo the avis
 		ArrayList<Avis> avisList = new ArrayList<Avis>();
 		for (int i = 0; i < listLinks.size(); i++) {
-			avisList.add(new Avis(listDate.get(i), listTitre.get(i), listLinks.get(i)));
+			avisList.add(new Avis(listDate.get(i), listTitre.get(i), listLinks.get(i),listLocation.get(i)));
 		}
 
 		System.out.println(avisList.size());
@@ -622,6 +665,12 @@ public class Crawlers {
 				// System.out.println(ele.text());
 				listTitre2.add(ele.text());
 			}
+			
+			Elements elesLocation2 = doc.getElementsByClass("localisation");
+			for (Element ele : elesLocation2) {
+				// System.out.println(ele.text());
+				listLocation.add(ele.text());
+			}
 			// using LinkedHashSet to delete the repeated members
 			setLinks = new LinkedHashSet<String>(listLinks2);
 			listLinks2 = new ArrayList<String>(setLinks);
@@ -632,7 +681,7 @@ public class Crawlers {
 //					System.out.println(listTitre2);
 //					System.out.println(listDate2);
 			for (int j = 0; j < listLinks2.size(); j++) {
-				avisList.add(new Avis(listDate2.get(j), listTitre2.get(j), listLinks2.get(j)));
+				avisList.add(new Avis(listDate2.get(j), listTitre2.get(j), listLinks2.get(j),listLocation.get(i)));
 			}
 
 		}
