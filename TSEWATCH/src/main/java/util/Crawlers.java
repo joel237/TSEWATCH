@@ -97,9 +97,12 @@ public class Crawlers {
 //		}
 		//System.out.println(crawler.FranceMarcheCrawler());
 		
-		ArrayList<Avis> avisList = crawler.FranceMarcheCrawler();
-		for(Avis avis:avisList) {
-			avis.print();
+		try {
+			String result = HTTPRequest.sendPost("https://www.marches-publics.gouv.fr/?page=entreprise.EntrepriseAdvancedSearch&searchAnnCons", null);
+			System.out.println(result);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

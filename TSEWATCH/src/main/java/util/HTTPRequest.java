@@ -34,11 +34,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -81,21 +84,30 @@ public class HTTPRequest {
 		    } catch (Exception e) {}
 		  }
 	
+	/**
+	 * 
+	 * A simple sendPost function
+	 * To Boamp.fr will add it's specific Headers to pass authentification
+	 */
 	public static String sendPost(String url,Map<String,String> params) throws Exception {
 		
 		disableCertificateValidation();
 		// Get a httpClient object
 		CloseableHttpClient httpclient = HttpClients.createDefault();
-	    
+		httpclient = (CloseableHttpClient)wrapClient(httpclient);  
 		// Creat a list to store params
 		List<NameValuePair> formparams = new ArrayList<NameValuePair>();
-		for(Map.Entry<String, String> entry : params.entrySet()) {
-			formparams.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+		if(params != null)
+		{
+			for(Map.Entry<String, String> entry : params.entrySet()) {
+				formparams.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+			}
 		}
 		UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, Consts.UTF_8);
 		
 		// Generate a post request
 		HttpPost httpPost = new HttpPost(url);
+		
 		if(url == Const.BOAMP) {
 			httpPost.setHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3");
 			httpPost.setHeader("Accept-Encoding","gzip, deflate, br");
@@ -128,20 +140,31 @@ public class HTTPRequest {
 		}
 		return result;
 	}
-	
-	public static String getHTML(String urlToRead) throws Exception {
-	      StringBuilder result = new StringBuilder();
-	      URL url = new URL(urlToRead);
-	      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	      conn.setRequestMethod("GET");
-	      BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	      String line;
-	      while ((line = rd.readLine()) != null) {
-	         result.append(line);
-	      }
-	      rd.close();
-	      return result.toString();
-	   }
+	public static HttpClient wrapClient(HttpClient base) {  
+	    try {  
+	        SSLContext ctx = SSLContext.getInstance("TLS");  
+	        X509TrustManager tm = new X509TrustManager() {  
+	            public X509Certificate[] getAcceptedIssuers() {  
+	                return null;  
+	            }  
+	  
+	            public void checkClientTrusted(X509Certificate[] arg0,  
+	                    String arg1) throws CertificateException {  
+	            }  
+	  
+	            public void checkServerTrusted(X509Certificate[] arg0,  
+	                    String arg1) throws CertificateException {  
+	            }  
+	        };  
+	        ctx.init(null, new TrustManager[] { tm }, null);  
+	        SSLConnectionSocketFactory ssf = new SSLConnectionSocketFactory(ctx,NoopHostnameVerifier.INSTANCE);  
+	        CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(ssf).build();  
+	        return httpclient;  
+	    } catch (Exception ex) {  
+	        ex.printStackTrace();  
+	        return HttpClients.createDefault();  
+	    }  
+	}  
 	
 	/**
 	 * 
@@ -189,7 +212,7 @@ public class HTTPRequest {
             httpclient.close();
         }
     }
-
+	
 	public static void main(String[] args) throws Exception 
 	{
 		/**
