@@ -6,23 +6,12 @@
   
   <dependencies>
   
-  	<dependency>
-    <groupId>org.kordamp.ikonli</groupId>
-    <artifactId>ikonli-javafx</artifactId>
-    <version>11.3.4</version>
-    </dependency>
-    <dependency>
-    <groupId>org.kordamp.ikonli</groupId>
-    <artifactId>ikonli-typicons-pack</artifactId>
-    <version>11.3.4</version>
-	</dependency>
-	
+  	
 	<dependency>
-    <groupId>org.kordamp.ikonli</groupId>
-    <artifactId>ikonli-fontawesome-pack</artifactId>
-    <version>11.3.4</version>
+	  <groupId>de.jensd</groupId>
+	  <artifactId>fontawesomefx</artifactId>
+	  <version>8.9</version>
 	</dependency>
-
   	<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
 	<dependency>
 	    <groupId>org.apache.httpcomponents</groupId>

@@ -28,7 +28,7 @@ public class DisplayController extends Application{
 		try {
 			// Load person overview
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(this.getClass().getClassLoader().getResource("MainpageOverview.fxml"));
+			loader.setLocation(this.getClass().getClassLoader().getResource("Home.fxml"));
 			AnchorPane mainpageOverview = (AnchorPane) loader.load();
 			Scene scene = new Scene(mainpageOverview);
 			primaryStage.setScene(scene);
