@@ -29,12 +29,12 @@
                         <MaterialDesignIconView fill="#2c2a2a" glyphName="KEYBOARD_BACKSPACE" size="15" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" layoutX="48.0" layoutY="86.0" prefHeight="28.0" prefWidth="86.0" style="-fx-background-radius: 10em;" text="API KEY">
+                  <JFXButton alignment="BASELINE_LEFT" layoutX="48.0" layoutY="86.0" prefHeight="28.0" prefWidth="120.0" style="-fx-background-radius: 10em;" text="API KEY">
                      <graphic>
                         <MaterialDesignIconView fill="#2c2a2a" glyphName="LABEL_OUTLINE" size="15" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" layoutX="48.0" layoutY="158.0" prefHeight="34.0" prefWidth="147.0" style="-fx-background-radius: 10em;" text="API PRIVATE KEY">
+                  <JFXButton alignment="BASELINE_LEFT" layoutX="48.0" layoutY="158.0" prefHeight="34.0" prefWidth="150.0" style="-fx-background-radius: 10em;" text="API PRIVATE KEY">
                      <graphic>
                         <MaterialDesignIconView fill="#2c2a2a" glyphName="LABEL_OUTLINE" size="15" />
                      </graphic>
