@@ -88,6 +88,7 @@ public class HomeController {
     
     @FXML
 	public void initialize() {
+    	recherche_pane.toFront();
     	label_warning.setVisible(false);
     	add_modify_pane.setVisible(hideAddModifyFlag);
     	
