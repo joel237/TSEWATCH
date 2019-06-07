@@ -45,7 +45,7 @@ public class Crawlers {
 		// Get result
 		String result;
 		try {
-			result = HTTPRequest.sendPost(Const.BOAMP, params);
+			result = HTTPRequest.sendPost(Const.BOAMP, params)[0];
 			Document doc = Jsoup.parse(result);
 			/**
 			 * To verify if the results exist in more than one page
@@ -97,11 +97,14 @@ public class Crawlers {
 //		ArrayList<Avis> avisList = crawler.proxiLegalesCrawler("orange", 2);
 //		ArrayList<Avis> avisList = crawler.marchepublicsInfoCrawler("1,3,7,15,26,38,42,43,63,69,73,74","= 0");
 //		ArrayList<Avis> avisList = crawler.marchepublicGouvCrawler("01/06/2019","06/06/2019");
-		ArrayList<Avis> avisList = crawler.auvergnerCrawler("","",2);
+//		ArrayList<Avis> avisList = crawler.auvergnerCrawler("","",2);
+		
+		crawler.tedEuropaCrawler();
+//		for(Avis avis:avisList) {
+//			avis.print();
+//		}
+		
 
-		for(Avis avis:avisList) {
-			avis.print();
-		}
 	}
 
 	/*****************************************************/
@@ -148,7 +151,7 @@ public class Crawlers {
 			String result = null;
 			// send POST request to the site to get the HTML data
 			try {
-				result = HTTPRequest.sendPost(urlProxi, params);
+				result = HTTPRequest.sendPost(urlProxi, params)[0];
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -335,7 +338,7 @@ public class Crawlers {
 		String result = null;
 		// send POST request to the site to get the HTML data
 		try {
-			result = HTTPRequest.sendPost(urlMPI, params);
+			result = HTTPRequest.sendPost(urlMPI, params)[0];
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -732,7 +735,7 @@ public class Crawlers {
 		String result = null;
 		// send POST request to the site to get the HTML data
 		try {
-			result = HTTPRequest.sendPost(urlMPI, params);
+			result = HTTPRequest.sendPost(urlMPI, params)[0];
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -852,7 +855,7 @@ public class Crawlers {
 			String result = null;
 			// send POST request to the site to get the HTML data
 			try {
-				result = HTTPRequest.sendPost(urlAuvergner, params);
+				result = HTTPRequest.sendPost(urlAuvergner, params)[0];
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -932,7 +935,102 @@ public class Crawlers {
 	/**
 	 * Crawler for Ted.europa
 	 */
-
+	public void tedEuropaCrawler() {
+		// define the url of the site
+		String urlAuvergner = "https://ted.europa.eu/TED/search/searchResult.do?action=initPage&pid=searchResult";
+		
+		ArrayList<String> listLinks = new ArrayList<String>();
+		ArrayList<String> listTitre = new ArrayList<String>();
+		ArrayList<String> listDate = new ArrayList<String>();
+		
+		Map<String, String> params = new HashMap<String, String>();
+		/*
+		 * chk: 'Call for expressions of interest'
+			chk: 'Periodic indicative notice with call for competition'
+			chk: 'Qualification system with call for competition'
+			chk: 'Prior information notice with call for competition'
+			action: search
+			lgId: en
+			quickSearchCriteria: 
+			_searchCriteria.statisticsMode: on
+			searchCriteria.searchScope: CURRENTLY_ACTIVE
+			searchCriteria.freeText: 
+			searchCriteria.countryList: FR
+			Rs.pick.671668.refDataId: COUNTRY
+			searchCriteria.documentTypeList: 'Call for expressions of interest','Periodic indicative notice with call for competition','Qualification system with call for competition','Prior information notice with call for competition'
+			Rs.pick.671669.refDataId: DOCUMENT_TYPE
+			searchCriteria.contractList: 
+			Rs.pick.671670.refDataId: CONTRACT
+			searchCriteria.ojs: 
+			searchCriteria.documentNumber: 
+			searchCriteria.publicationDateChoice: RANGE_PUBLICATION_DATE
+			searchCriteria.fromPublicationDate: 01/05/2019
+			searchCriteria.toPublicationDate: 01/06/2019
+			searchCriteria.cpvCodeList: 
+			Rs.pick.671671.refDataId: CPV_CODE
+			searchCriteria.nutsCodeList: 
+			Rs.pick.671672.refDataId: NUTS_CODE
+			searchCriteria.mainActivityList: 
+			Rs.pick.671673.refDataId: MAIN_ACTIVITY
+			searchCriteria.documentationDate: 
+			searchCriteria.deadline: 
+			searchCriteria.place: 
+			searchCriteria.regulationList: 
+			Rs.pick.671674.refDataId: REGULATION
+			searchCriteria.procedureList: 
+			Rs.pick.671675.refDataId: PROCEDURE
+			searchCriteria.directiveList: 
+			Rs.pick.671676.refDataId: DIRECTIVE
+			searchCriteria.authorityName: 
+			searchCriteria.typeOfAuthorityList: 
+			Rs.pick.671677.refDataId: TYPE_OF_AUTHORITY
+			searchCriteria.headingAList: 
+			Rs.pick.671678.refDataId: HEADING_A
+			_searchCriteria.statisticsMode: on
+			Rs.gp.6158052.pid: secured
+			Rs.gp.6158053.pid: secured
+		*/
+		params.put("searchCriteria.countryList", "FR");
+		params.put("searchCriteria.fromPublicationDate", "01/05/2019");
+		params.put("searchCriteria.toPublicationDate", "01/06/2019");
+//		params.put("chk", "'Call for expressions of interest'");
+//		params.put("chk", "'Periodic indicative notice with call for competition'");
+//		params.put("chk", "'Qualification system with call for competition'");
+//		params.put("chk", "'Prior information notice with call for competition'");
+//		params.put("searchCriteria.documentTypeList", "'Call for expressions of interest','Periodic indicative notice with call for competition','Qualification system with call for competition','Prior information notice with call for competition'");
+//		params.put("action", "search");
+//		params.put("lgId", "en");
+//		params.put("searchCriteria.searchScope", "CURRENTLY_ACTIVE");
+//		params.put("_searchCriteria.statisticsMode", "on");
+//		params.put("searchCriteria.publicationDateChoice", "RANGE_PUBLICATION_DATE");
+//		params.put("lgId", "en");
+		
+		
+		
+		
+		String location = null;
+		// send POST request to the site to get location
+		try {
+			location = HTTPRequest.sendPost(urlAuvergner, params)[1];
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(location);
+		//send GET request by location to get the HTML data
+		String result = null;
+		try {
+			result = HTTPRequest.sendGET(location);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(result);
+		
+		
+		
+	}
 	/*****************************************************/
 
 	/**

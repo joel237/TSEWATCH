@@ -29,22 +29,24 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.Consts;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.*;
+import org.apache.http.client.params.AllClientPNames;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -53,6 +55,8 @@ import org.jsoup.select.Elements;
 
 
 public class HTTPRequest {
+	
+	//public String locaiton = null;
 	
 	public static void disableCertificateValidation() {
 		    // Create a trust manager that does not validate certificate chains
@@ -84,7 +88,7 @@ public class HTTPRequest {
 		    } catch (Exception e) {}
 		  }
 	
-	public static String sendPost(String url,Map<String,String> params) throws Exception {
+	public static String[] sendPost(String url,Map<String,String> params) throws Exception {
 		
 		disableCertificateValidation();
 		// Get a httpClient object
@@ -120,8 +124,15 @@ public class HTTPRequest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		//get the location from the 302
+		Header locationHeader = response.getFirstHeader("Location");
+		String location = locationHeader.getValue();
+		//System.out.println(location);
+		
+
 		HttpEntity entity1 = response.getEntity();
-		String result = null;
+		String result = "";
 		try {
 			result = EntityUtils.toString(entity1);
 		} catch (ParseException e) {
@@ -129,7 +140,11 @@ public class HTTPRequest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return result;
+		
+		String[] result302  = new String[2];
+		result302[0] = result;
+		result302[1] = location;
+		return result302;
 	}
 	
 	
@@ -220,6 +235,30 @@ public class HTTPRequest {
         }
     }
 
+
+	// GET request to get the location from the 302
+	public static String getLocationUrl(String url) {
+		RequestConfig config = RequestConfig.custom().setConnectTimeout(50000).setConnectionRequestTimeout(10000).setSocketTimeout(50000)
+                .setRedirectsEnabled(false).build();//不允许重定向   
+		CloseableHttpClient httpClient = HttpClients.custom().setDefaultRequestConfig(config).build(); 
+		String location = null;
+		int responseCode = 0;
+ 
+		HttpResponse response;
+		try {
+			response = httpClient.execute(new HttpGet(url));
+			responseCode = response.getStatusLine().getStatusCode();
+			if (responseCode == 302) {
+				Header locationHeader = response.getFirstHeader("Location");
+				location = locationHeader.getValue();
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return location;
+	}
 	public static void main(String[] args) throws Exception 
 	{
 		/**
